@@ -559,9 +559,11 @@ html:not(.js) .member-card, .story.is-static .member-card { position: relative; 
    ========================================================================= */
 .calc { background: var(--sky-100); padding-top: var(--section-pad); position: relative; }
 .calc__grid { display: grid; gap: 40px; }
-.calc__main .lead { color: var(--text-muted); margin-top: 20px; }
+.calc__grid > * { min-width: 0; }
+.calc__head { margin-bottom: 0; }
+.calc__head .lead { max-width: 44ch; }
 .calc-card {
-  margin-top: 40px; max-width: 520px;
+  max-width: 520px; margin-inline: auto;
   background: #fff; border-radius: var(--r-lg); padding: 32px;
   box-shadow: var(--shadow-lg);
 }
@@ -603,47 +605,150 @@ html:not(.js) .member-card, .story.is-static .member-card { position: relative; 
 .calc-card__msg .icon { color: var(--sky-500); width: 18px; height: 18px; margin-top: 2px; }
 .calc-card__msg:not(.is-covered) .icon { display: none; }
 .calc-card__note { font-size: var(--fs-small); color: var(--text-muted); margin: 16px 0 24px; }
-.calc__mascot { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; padding-bottom: 48px; }
-.tickets-panel {
-  position: relative; width: 100%; max-width: 520px;
-  background: rgb(255 255 255 / .7); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
-  border: 1px solid rgb(255 255 255 / .9); border-radius: var(--r-lg); padding: 28px 28px 32px;
-  box-shadow: var(--shadow-md);
+/* Park pass: navy card, mascot breaking out of its top edge, a hand of tickets (one per person). */
+.calc__visual { position: relative; z-index: 1; padding-top: 96px; padding-bottom: 72px; }
+.pass {
+  position: relative; max-width: 520px; margin-inline: auto;
+  color: var(--text-on-dark); border-radius: var(--r-xl);
+  padding: 32px 32px 24px;
+  background:
+    radial-gradient(70% 55% at 50% 78%, rgb(4 154 220 / .55), transparent 70%),
+    radial-gradient(40% 30% at 12% 0%, rgb(254 176 39 / .16), transparent 70%),
+    var(--blue-900);
+  box-shadow: var(--shadow-lg);
+  isolation: isolate; container-type: inline-size;
 }
-.tickets-panel .eyebrow { margin-bottom: 8px; }
-.tickets-panel__title { font-family: var(--font-display); font-weight: 700; font-size: 1.75rem; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 20px; }
-.tickets-panel__title span { color: var(--blue-600); font-variant-numeric: tabular-nums; }
-.tickets { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; align-content: start; }
-.ticket {
-  display: flex; align-items: center; gap: 10px; height: 56px; padding: 0 10px 0 8px;
-  background: #fff; border-radius: 12px; box-shadow: var(--shadow-sm);
-  border-left: 3px solid var(--sun-400);
+/* faint concentric "sun rays" behind the fan */
+.pass::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: -1; pointer-events: none;
+  background: repeating-radial-gradient(circle at 50% 118%, rgb(255 255 255 / .05) 0 1px, transparent 1px 28px);
+  -webkit-mask: linear-gradient(to top, #000 20%, transparent 85%); mask: linear-gradient(to top, #000 20%, transparent 85%);
 }
-.ticket__icon { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: var(--sky-100); color: var(--blue-700); flex: none; }
-.ticket__icon .icon { width: 18px; height: 18px; }
-.ticket__body { flex: 1; display: flex; flex-direction: column; line-height: 1.15; }
-.ticket__k { font-size: 0.75rem; color: var(--text-muted); }
-.ticket s { font-weight: 650; font-size: 0.9375rem; color: var(--text-muted); text-decoration-color: var(--orange-500); text-decoration-thickness: 2px; }
-.ticket__tag { font-size: 0.6875rem; font-weight: 750; text-transform: uppercase; letter-spacing: .06em; padding: 4px 8px; border-radius: 99px; background: var(--grad-sun); color: var(--blue-900); }
-.tickets-panel__total { margin-top: 20px; padding-top: 16px; border-top: 1px dashed var(--line); font-size: 0.9375rem; color: var(--text-muted); max-width: 60%; }
-.tickets-panel__total strong { color: var(--blue-900); font-weight: 750; white-space: nowrap; }
-.calc__mascot-fx { position: absolute; right: -12px; bottom: -8px; width: 220px; pointer-events: none; }
-@media (max-width: 479px) {
-  .tickets-panel { padding: 22px 18px 26px; }
-  .tickets { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .ticket { gap: 8px; }
-  .ticket__tag { display: none; }
-  .calc__mascot-fx { width: 160px; right: -8px; }
+.pass .eyebrow { margin-bottom: 10px; }
+.pass__title {
+  font-family: var(--font-display); font-weight: 700; font-size: clamp(1.625rem, 1.2rem + 1.2vw, 2.125rem);
+  letter-spacing: -0.02em; line-height: 1.05; max-width: 9.5em;
 }
-.calc__mascot-img { width: 100%; animation: mascotFloat 6s ease-in-out infinite alternate; }
+.pass__count {
+  display: inline-grid; overflow: clip; vertical-align: bottom; padding-block: 2px;
+  color: var(--sun-400); font-variant-numeric: tabular-nums;
+}
+.pass__count > span { grid-area: 1 / 1; }
+
+.pass__mascot {
+  position: absolute; z-index: 2; pointer-events: none;
+  width: 170px; right: -14px; top: -104px;
+}
+.pass__mascot picture { display: block; }
+.pass__mascot-img { width: 100%; animation: mascotFloat 6s ease-in-out infinite alternate; }
 @keyframes mascotFloat { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+
+/* The fan: every ticket rotates around a pivot far below its foot, like cards in a hand.
+   JS only sets --n (count) and --i (index); geometry lives here so it can transition. */
+.fan {
+  /* ticket width tracks the card's width so a full hand (7) always fits */
+  --tw: clamp(84px, 27cqi, 140px);
+  --fan: 46deg;                /* total arc when the hand is full */
+  position: relative; height: calc(var(--tw) * 1.76 + 40px);
+  margin: 8px -8px 0;
+}
+.ticket {
+  --off: calc(var(--i) - (var(--n) - 1) / 2);
+  --step: min(12deg, calc(var(--fan) / max(var(--n) - 1, 1)));
+  position: absolute; left: 50%; bottom: calc(var(--tw) * 0.36 + 14px);
+  width: var(--tw); margin-left: calc(var(--tw) / -2);
+  aspect-ratio: 5 / 7; font-size: calc(var(--tw) / 8);
+  transform-origin: 50% 255%;
+  transform: rotate(calc(var(--off) * var(--step))) translateY(var(--lift, 0%));
+  filter: drop-shadow(0 10px 14px rgb(2 12 28 / .35));
+  transition: transform 560ms var(--ease-out), opacity 260ms ease;
+}
+.ticket__paper {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  background: #fff; color: var(--blue-900); border-radius: 0.75em; overflow: hidden;
+  /* side notches at the perforation line */
+  -webkit-mask: radial-gradient(circle 0.5em at 0 70%, transparent 96%, #000) left / 51% 100% no-repeat,
+                radial-gradient(circle 0.5em at 100% 70%, transparent 96%, #000) right / 51% 100% no-repeat;
+  mask: radial-gradient(circle 0.5em at 0 70%, transparent 96%, #000) left / 51% 100% no-repeat,
+        radial-gradient(circle 0.5em at 100% 70%, transparent 96%, #000) right / 51% 100% no-repeat;
+}
+.ticket__top {
+  display: flex; align-items: center; gap: 0.4em; padding: 0.55em 0.75em;
+  background: var(--grad-sun); font-size: 0.6875em; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+}
+.ticket__top .icon { width: 1.4em; height: 1.4em; }
+.ticket__park {
+  flex: 1; padding: 0.6em 0.75em 0; font-family: var(--font-display); font-weight: 700;
+  font-size: 1.0625em; line-height: 1.05; letter-spacing: -0.01em;
+}
+.ticket__stub {
+  height: 30%; display: flex; flex-direction: column; justify-content: center; padding: 0 0.85em;
+  border-top: 2px dashed rgb(6 38 74 / .16); line-height: 1.1;
+}
+.ticket__stub s {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.125em; color: var(--text-muted);
+  text-decoration-color: var(--orange-500); text-decoration-thickness: 2px;
+}
+.ticket__stub span { font-size: 0.6875em; color: var(--text-muted); }
+.ticket__stamp {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%; rotate: -14deg;
+  padding: 0.2em 0.55em; border: 2px solid var(--orange-500); border-radius: 0.35em;
+  background: rgb(255 255 255 / .9); color: var(--orange-600);
+  font-size: 0.75em; font-weight: 850; letter-spacing: .12em; text-transform: uppercase;
+  animation: stamp 420ms var(--ease-out) var(--sd, 220ms) both;
+}
+@keyframes stamp {
+  0% { opacity: 0; scale: 1.9; }
+  60% { opacity: 1; scale: 0.94; }
+  100% { opacity: 1; scale: 1; }
+}
+
+/* States */
+.ticket.is-entering { --lift: 65%; opacity: 0; }
+.ticket.is-leaving { --lift: 55%; opacity: 0; pointer-events: none; }
+.js .fan:not(.is-dealt) .ticket { --off: 0; --lift: 45%; opacity: 0; }
+.js .fan:not(.is-dealt) .ticket__stamp { animation: none; opacity: 0; }
+.fan.is-dealing .ticket { transition-delay: calc(var(--i) * 70ms); }
+.fan.is-instant .ticket { transition: none; }
+.ticket.is-static .ticket__stamp { animation: none; }
+@media (hover: hover) and (pointer: fine) {
+  .fan:hover { --fan: 58deg; }
+  .ticket:hover { --lift: -10%; }
+}
+
+.pass__strip {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  margin: 0 -12px; padding: 12px 12px 12px 18px; border-radius: var(--r-md);
+  background: rgb(255 255 255 / .08); border: 1px solid var(--line-on-dark);
+}
+.pass__was { display: flex; flex-direction: column; line-height: 1.15; font-size: var(--fs-small); color: var(--text-on-dark-muted); }
+.pass__was s {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.375rem; color: #fff;
+  font-variant-numeric: tabular-nums; text-decoration-color: var(--orange-500); text-decoration-thickness: 3px;
+}
+.pass__pill {
+  display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: var(--r-pill);
+  background: var(--grad-sun); color: var(--blue-900); font-size: var(--fs-small); font-weight: 750; white-space: nowrap;
+}
+.pass__pill .icon { width: 16px; height: 16px; }
+
+@media (max-width: 479px) {
+  .pass { padding: 26px 20px 20px; }
+  .pass__mascot { width: 136px; right: -6px; top: -84px; }
+  .fan { --fan: 36deg; margin-inline: -4px; }
+  .pass__strip { margin-inline: -6px; }
+}
 .calc .waves { margin-top: 0; }
 @media (max-width: 767px) { .calc-card { padding: 24px; } }
 @media (min-width: 1024px) {
-  .calc__grid { grid-template-columns: repeat(12, 1fr); gap: 24px; }
-  .calc__main { grid-column: 1 / 7; padding-bottom: 64px; }
-  .calc__mascot { grid-column: 8 / 13; align-self: start; padding-bottom: 0; margin-top: 200px; }
-  .calc__mascot-fx { width: 250px; right: -64px; bottom: -96px; }
+  /* centered header, then two equal-height cards side by side */
+  .calc__grid { grid-template-columns: repeat(2, minmax(0, 520px)); justify-content: center; column-gap: 40px; row-gap: 72px; }
+  .calc__head { grid-column: 1 / -1; }
+  .calc__main, .calc__visual { display: flex; padding: 0 0 96px; }
+  .calc-card, .pass { flex: 1; width: 100%; max-width: none; margin: 0; }
+  .pass { display: flex; flex-direction: column; }
+  .pass .fan { margin-block: auto; } /* spare height splits evenly around the hand */
+  .pass__mascot { width: 230px; right: -56px; top: -132px; }
 }
 
 /* =========================================================================
@@ -1248,7 +1353,7 @@ details[open]::details-content { block-size: auto; }
     .app__halo { animation: haloSpin linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
     .app-note--1 { animation: chipRise1 linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
     .app-note--2 { animation: chipRise2 linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
-    .calc__mascot-fx { animation: mascotDrift linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
+    .pass__mascot { animation: mascotDrift linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
   }
 }
 @keyframes parallax { from { transform: translateY(-8%) scale(1.16); } to { transform: translateY(8%) scale(1.16); } }
@@ -1272,7 +1377,9 @@ details[open]::details-content { block-size: auto; }
     transform: none !important; transition: opacity 300ms ease !important;
   }
   .js .swoosh__svg path, .js [data-diff] .diff-list--with svg path { stroke-dashoffset: 0 !important; transition: none !important; }
-  .waves svg, .calc__mascot-img { animation: none !important; }
+  .waves svg, .pass__mascot-img { animation: none !important; }
+  .ticket { transition: none !important; }
+  .ticket__stamp { animation: none !important; }
   .parallax-img, .summary__bg img { transform: none !important; }
   .js .story__state { transform: none !important; filter: none !important; }
   html { scroll-behavior: auto; }

@@ -253,13 +253,12 @@
     <!-- ============ 5.5 CALCULATOR ============ -->
     <section class="calc" id="calculadora" aria-labelledby="calc-title">
       <div class="container calc__grid">
+        <div class="section-head section-head--center calc__head" data-reveal>
+          <p class="eyebrow">Faça as contas</p>
+          <h2 class="h2" id="calc-title">Um benefício que praticamente <span class="swoosh">se paga sozinho<svg class="swoosh__svg" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="sun-calc" x1="0" x2="1"><stop offset="0" stop-color="#FEB027"/><stop offset="1" stop-color="#FF7A2F"/></linearGradient></defs><path d="M4 18 C 80 4, 220 2, 296 14" pathLength="1" stroke="url(#sun-calc)" stroke-width="6" stroke-linecap="round" fill="none"/></svg></span></h2>
+          <p class="lead">Só com o Metropolitan Park, sua economia já pode compensar o investimento.</p>
+        </div>
         <div class="calc__main">
-          <div data-reveal>
-            <p class="eyebrow">Faça as contas</p>
-            <h2 class="h2" id="calc-title">Um benefício que praticamente <span class="swoosh">se paga sozinho<svg class="swoosh__svg" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="sun-calc" x1="0" x2="1"><stop offset="0" stop-color="#FEB027"/><stop offset="1" stop-color="#FF7A2F"/></linearGradient></defs><path d="M4 18 C 80 4, 220 2, 296 14" pathLength="1" stroke="url(#sun-calc)" stroke-width="6" stroke-linecap="round" fill="none"/></svg></span></h2>
-            <p class="lead">Só com o Metropolitan Park, sua economia já pode compensar o investimento.</p>
-          </div>
-
           <div class="calc-card" data-reveal data-calc>
             <p class="calc-card__label" id="calc-people-label">Quantas pessoas vão ao parque?</p>
             <div class="stepper" role="group" aria-labelledby="calc-people-label">
@@ -277,18 +276,26 @@
             <a class="btn btn--primary btn--block" href="#planos" data-cta-location="calculator">Quero aproveitar essa economia<span class="btn__arrow"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#i-arrow-right"/></svg></span></a>
           </div>
         </div>
-        <div class="calc__mascot">
-          <div class="tickets-panel" data-reveal>
-            <p class="eyebrow">Sua família no parque</p>
-            <p class="tickets-panel__title"><span data-calc-count>4</span> ingressos inclusos</p>
-            <ul class="tickets" data-calc-tickets aria-hidden="true"></ul>
-            <p class="tickets-panel__total">Você deixa de pagar <strong data-calc-total>R$ 320</strong> por visita</p>
-          </div>
-          <div class="calc__mascot-fx" data-fx="mascot" aria-hidden="true">
-            <picture>
-              <source type="image/avif" srcset="assets/img/mascot-400.avif 400w, assets/img/mascot-600.avif 600w, assets/img/mascot-800.avif 800w" sizes="(min-width: 1024px) 520px, 320px">
-              <img class="calc__mascot-img" src="assets/img/mascot-600.webp" srcset="assets/img/mascot-400.webp 400w, assets/img/mascot-600.webp 600w, assets/img/mascot-800.webp 800w" sizes="(min-width: 1024px) 520px, 320px" width="800" height="800" loading="lazy" decoding="async" alt="">
-            </picture>
+        <div class="calc__visual">
+          <div class="pass" data-reveal>
+            <div class="pass__mascot" data-fx="mascot" aria-hidden="true">
+              <picture data-calc-mascot>
+                <source type="image/avif" srcset="assets/img/mascot-400.avif 400w, assets/img/mascot-600.avif 600w, assets/img/mascot-800.avif 800w" sizes="(min-width: 1024px) 260px, 170px">
+                <img class="pass__mascot-img" src="assets/img/mascot-400.webp" srcset="assets/img/mascot-400.webp 400w, assets/img/mascot-600.webp 600w, assets/img/mascot-800.webp 800w" sizes="(min-width: 1024px) 260px, 170px" width="800" height="800" loading="lazy" decoding="async" alt="">
+              </picture>
+            </div>
+            <p class="eyebrow eyebrow--dark">Sua família no parque</p>
+            <p class="pass__title"><span class="pass__count" data-calc-count><span>4</span></span> <span data-calc-noun>ingressos inclusos</span></p>
+            <ul class="fan" data-calc-tickets style="--n:4" aria-hidden="true">
+              <li class="ticket" style="--i:0"><span class="ticket__paper"><span class="ticket__top"><svg class="icon"><use href="assets/icons/sprite.svg#i-ticket"/></svg>Ingresso</span><span class="ticket__park">Metropolitan Park</span><span class="ticket__stub"><s>R$ 80</s><span>1 pessoa</span></span></span><span class="ticket__stamp">Incluso</span></li>
+              <li class="ticket" style="--i:1"><span class="ticket__paper"><span class="ticket__top"><svg class="icon"><use href="assets/icons/sprite.svg#i-ticket"/></svg>Ingresso</span><span class="ticket__park">Metropolitan Park</span><span class="ticket__stub"><s>R$ 80</s><span>1 pessoa</span></span></span><span class="ticket__stamp">Incluso</span></li>
+              <li class="ticket" style="--i:2"><span class="ticket__paper"><span class="ticket__top"><svg class="icon"><use href="assets/icons/sprite.svg#i-ticket"/></svg>Ingresso</span><span class="ticket__park">Metropolitan Park</span><span class="ticket__stub"><s>R$ 80</s><span>1 pessoa</span></span></span><span class="ticket__stamp">Incluso</span></li>
+              <li class="ticket" style="--i:3"><span class="ticket__paper"><span class="ticket__top"><svg class="icon"><use href="assets/icons/sprite.svg#i-ticket"/></svg>Ingresso</span><span class="ticket__park">Metropolitan Park</span><span class="ticket__stub"><s>R$ 80</s><span>1 pessoa</span></span></span><span class="ticket__stamp">Incluso</span></li>
+            </ul>
+            <div class="pass__strip">
+              <p class="pass__was"><span>Na bilheteria</span><s data-calc-total>R$ 320</s></p>
+              <p class="pass__pill"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#i-check"/></svg>Incluso no seu plano</p>
+            </div>
           </div>
         </div>
       </div>
